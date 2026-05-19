@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevOps Web App</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 40px;
+      border-radius: 16px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #38bdf8;
+      min-height: 20px;
+    }
+
+    .tag {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>🚀 DevOps Simple App</h1>
+    <p>Frontend → Backend (Docker + Kubernetes Ready)</p>
+
+    <button onclick="getMessage()">Call Backend API</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="tag">Backend: Node.js | Frontend: HTML | Deploy: Kubernetes</div>
+  </div>
+
+ <script>
+  const API_URL = "http://localhost:5000/api/messages";
+
+  async function getMessage() {
+    const result = document.getElementById("result");
+    result.innerText = "Loading...";
+
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+
+      // backend returns array → show latest message
+      if (data.length > 0) {
+        result.innerText = data[0].text;
+      } else {
+        result.innerText = "No messages found in DB";
+      }
+
+    } catch (err) {
+      console.log(err);
+      result.innerText = "❌ Backend not reachable";
+    }
+  }
+</script>
+</body>
+</html>
