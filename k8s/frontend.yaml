@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: devops-frontend:latest
-          imagePullPolicy: IfNotPresent
+          image: dockerresma/dockerresma/devops-frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           readinessProbe:

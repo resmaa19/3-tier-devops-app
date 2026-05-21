@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: devops-backend:latest
-          imagePullPolicy: IfNotPresent
+          image: dockerresma/dockerresma/devops-backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
